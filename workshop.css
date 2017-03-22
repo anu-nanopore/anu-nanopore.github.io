@@ -1,0 +1,22 @@
+
+body {
+  background: white;
+  color: black;
+  font-family: 'Raleway', sans-serif;
+  background: url(images/other/minion.png) top right no-repeat; 
+  background-attachment:fixed;
+}
+
+h1, h2, h3 {
+  color: brown;
+  font-weight: bold;
+}
+
+#blurb {
+  font-style: italic;
+  font-weight: bold;
+}
+
+img {
+  height: 100px:
+}
