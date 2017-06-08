@@ -34,12 +34,18 @@ class: center, middle
 
 # General pipeline so far:
 
-<img of pores to voltage trace to computer>
+<img src='./images/sequencing-animated_0.gif' height = '250' />
 
 - The MinKNOW software on the sequencing laptop facilitates the collection and parsing of data from the MinION flowcell.
-- This 'raw' data is voltage traces that are measured at 5khz (5 thousands times per second).
+- This 'raw' data is voltage traces that are measured at 5khz (5 thousand times per second).
 - The voltage across the membrane changes as molecules enter, move through, and exit each sequencing pore.
   - This entire measurement is called an 'event' which will be the collected signal measurements for that molecule.
+
+---
+# General pipeline so far:
+
+<img src='./images/sequencing-animated_0.gif' height = '250' />
+
 - The software recognizes this initial voltage change and begins writing out the trace to a new `fast5` file.
 - There is **one file per DNA molecule** that passes through each pore. Therefore many files are created!
   - Hence, the requirement for high quality transfer speeds on your laptop to facilitate this (SSDs)
@@ -47,6 +53,9 @@ class: center, middle
 
 ---
 # The initial data is NOT basecalled
+
+- Although MinKNOW **can** do live basecalling, we have omitted that step in our workshop.
+  - More computationally intensive
 
 - At this point, we do not have nucleotide information, just voltage traces.
 - We can look at this information within the fast5 files that are created.
