@@ -10,6 +10,33 @@ pandoc brachy.md --smart --standalone --bibliography test.bib -o brachy.pdf
 
 ## Lets look at a `fast5` file in `HDFView` to see what has changed
 
+```
+/{attributes: file_version}
+|-UniqueGlobalKey/
+| |-tracking_id/{attributes: standard tracking fields}
+| |-channel_id/{attributes: channel_number, digitisation, offset, range, sampling_rate}
+| |-context_tags/{attributes: set when the experiment is configured}
+|-Raw/
+| |-Reads/
+| |-Read_42/{attributes: start_time, duration, read_number, start_mux, read_id}
+| |-Signal{samples}
+|-Analyses/
+| |-Segmentation_000{attributes: name, version}
+| | |-Configuration/
+| | | |-stall_removal/{attributes: parameters for stall removal}
+| | | |-split_hairpin/{attributes: parameters for hairpin splitting}
+| | |-Summary/{attributes: return_status}
+| | | |-segmentation/{attributes: has_template, has_complement, first_sample_template, duration_template, first_sample_complement, duration_complement, num_events_template, num_events_complement}
+| |-Basecall_1D_000/{attributes: name, version}
+| | |-Configuration/
+| | | |-basecall_1d/{attributes: parameters for basecalling}
+| | |-BaseCalled_template/
+| | | |-Events{mean, stdv, start, length, model_state, move, weights, p_model_state, mp_state, p_mp_state, p_A, p_C, p_G, p_T}
+| | | |-Fastq{string}
+| | |-Summary/{attributes: return_status}
+| | | |-basecall_1d_template/{attributes: num_events, called_events, mean_qscore, strand_score, sequence_length, stay_prob, step_prob, skip_prob}
+|
+```
 ## poretools
 
 `poretools` is a toolkit for MinION data that can extract relevant data from `fast5` data into formats you know and love.

@@ -58,16 +58,21 @@ class: center, middle
   - More computationally intensive
 
 - At this point, we do not have nucleotide information, just voltage traces.
-- We can look at this information within the fast5 files that are created.
+- We can look at this information within the `fast5` files that are created.
 
 ---
 
 # What are `fast5` files?
 
+<img src='./images/hdf5_structure4.jpg' height = '300' />
+
 - Each file contains signal trace for a single DNA molecule
 - `fast5` files are stored in the `HDF5` file format.
 - `HDF5` acts as a larger organizational framework (box) in which different types of data can be stored in a hierarchical way.
   - Like directories, sub-directories, and files/data on your computer.
+  - `HDF5` files are binary (not directly human readable)
+
+---
 
 - The `HDF5` format is quite flexable in being able to contain a wide variety of data types internally (strings,int,float,arrays, etc) within the single 'HDF5' format.
 
@@ -75,7 +80,7 @@ class: center, middle
 
 - The format allows for new items to be added to it over time, creating a single container from raw information onwards
   - We will see this shortly.
-
+<img src='./images/hdf5_structure4.jpg' height = '300' />
 
 ---
 
@@ -96,16 +101,35 @@ class: center, middle
 
 As of MinKNOW v1.6.11:
 
-Windows:
+- Windows: `:\data\reads`
+    - This path should be set when you install MinKNOW
 
-OSX: `/Library/MinKNOW/data/reads/`
-
-Linux:
+- OSX: `/Library/MinKNOW/data/reads/`
+    - *note: from a finder window, can get beyond your home directory using `SHIFT + CMD + G` and directly provide this path
+    - <img src='./images/osx_path.png' height='100'/>
+- Linux: `/var/lib/MinKNOW/data`
 
 ---
 
 # Let's take a look at a `fast5` file
-![screenshot from hdfview](./images/hdf5view_1.png)
+
+```
+/{attributes: file_version}
+|-UniqueGlobalKey/
+| |-tracking_id/{attributes: asic_id, asic_id_eeprom, asic_temp,
+ device_id, exp_script_hash, exp_script_name, exp_script_purpose, exp_start_time,
+ flow_cell_id, heatsink_temp, hostname, protocol_run_id, protocols_version_name,
+ run_id, version, version_name}
+| |-channel_id/{attributes: channel_number, digitisation, offset, range,
+ sampling_rate}
+| |-context_tags/{attributes: set when the experiment is configured}
+|-Raw/
+| |-Reads/
+| |-Read_42/{attributes: start_time, duration, read_number, start_mux,
+ read_id, median_before}
+| |-Signal{samples}
+|
+```
 
 ???
 On RSB laptops virtual ubuntu image, we have HDFView as well as local fast5 files to examine
@@ -119,7 +143,7 @@ Try to plot the signal data just for the hell of it from HDFView to get a sense 
 
 # Additional Notes
 
-- Remember that everything is rapidly-changing! What you learn now will likely be redundant and/or wrong with the MinION practices six months from now.
+- Remember that **everything is rapidly-changing!** What you learn now will likely be redundant and/or wrong with the MinION practices six months from now.
 
 - ONP wants to move towards elimination of `fast5` files and have MinKNOW basecall directly to fastq files (you never seen these steps)
 
