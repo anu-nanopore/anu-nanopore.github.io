@@ -80,7 +80,7 @@ class: center, middle
 1. First, we must initialize the software environment to use it:
 
 ```
-source .....
+source activate poretools
 ```
 
 ---
@@ -143,7 +143,8 @@ Lets give some a go!
 # We can easily take a directory of basecalled fast5 files and create a `fastq` file:
 
 ```
-poretools fastq ./path/to/fast5 > my.fastq
+cd data/poretools/basecalled/workspace/
+poretools fastq ./0 > my.fastq
 ```
 
 **note**: although you can provide wildcards such as `*.fast5`, often it will be
@@ -154,7 +155,7 @@ the directory specifically
 # Or a `fasta` file:
 
 ```
-poretools fasta ./path/to/fast5 > my.fasta
+poretools fasta ./0 > my.fasta
 ```
 
 From here, we have sequence data in formats that are more common to date and can
@@ -165,7 +166,7 @@ be used with other analysis methods (to be discussed later today!)
 # `poretools` can also provide information regarding your sequencing stats:
 
 ```
-poretools stats ./path/to/fast5 stats
+poretools stats ./0
 ```
 
 ---
@@ -173,28 +174,29 @@ poretools stats ./path/to/fast5 stats
 # plots of read size histogram:
 
 ```
-poretools hist --theme-bw ./path/to/fast5
+poretools hist --theme-bw ./0
 ```
 
-<img src='https://poretools.readthedocs.io/en/latest/_images/hist.png' height='450'/>
+<img src='./images/poretools_hist.png' height='450'/>
 
 ---
 
 # examine the overall yield of reads over time
 (remember, the fast5 files keep track of all sorts of metadata for these purposes!):
 
+I can't get this to work on our VM. I think latest MinKNOW update screwed things up.
 ```
-poretools yield_plot --plot-type reads ./path/to/fast5
+poretools yield_plot --plot-type reads ./0
 ```
 
-<img src='https://poretools.readthedocs.io/en/latest/_images/yield.reads.png' height='400'/>
+<img src='https://poretools.readthedocs.io/en/latest/_images/yield.reads.png' height='350'/>
 
 ---
 
 ## or by total basepairs:
 
 ```
-poretools yield_plot --plot-type basepairs ./path/to/fast5
+poretools yield_plot --plot-type basepairs ./0
 ```
 
 ---
@@ -202,7 +204,7 @@ poretools yield_plot --plot-type basepairs ./path/to/fast5
 # look at the quality score distribution over read position:
 
 ```
-poretools qpalpos ./path/to/fast5
+poretools qualpos ./0
 ```
 <img src='https://poretools.readthedocs.io/en/latest/_images/qualpos.png' height='350'/>
 
@@ -211,8 +213,9 @@ poretools qpalpos ./path/to/fast5
 # look at the overall performance of the pores on the flowcell
 (useful for finding positional / technical artifacts from sequencing)
 
+Again, broken
 ```
-poretools occupancy ./path/to/fast5
+poretools occupancy ./0
 ```
 <img src='https://poretools.readthedocs.io/en/latest/_images/occupancy.png' height='350'/>
 
@@ -220,17 +223,23 @@ poretools occupancy ./path/to/fast5
 You can use `poretools` to examine the initial signal traces from a single fast5 file as well using `squiggle`
 
 ```
-poretools squiggle ./path/to/single.fast5
+
+poretools squiggle ./0/single.fast5
 ```
 
+<img src='./images/squiggle.png' height='450' />
 ---
 # and most important, report the `winner` (longest read you got!)
 
 ```
-poretools winner ./path/to/fast5
+poretools winner ./0
 ```
 
 What is the longest read in our test set?
+
+Prints out the single read record:
+
+<img src='./images/winner.png' height='100' />
 
 ---
 # Other notes
